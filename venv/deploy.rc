@@ -1,3 +1,5 @@
 #!/bin/sh
 sudo pip install virtualenv
 virtualenv venv
+source ./bin/activate
+pip install flask
