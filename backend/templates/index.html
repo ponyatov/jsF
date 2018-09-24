@@ -6,8 +6,9 @@
 	<link rel="icon" type="image/png" href="icon.png">
 	<link rel="manifest" href="/app.manifest">	
 	<script src="/PEG.js"></script>
-	<script src="/SYM.js"></script>
+	<script id=SYMjs src="/SYM.js"></script>
 	<script src="/FORTH.js"></script>
+	<script>document.querySelector('#SYMjs').addEventListener('load', FORTH_init )</script>
 </head>
 <body>
 

@@ -3,5 +3,6 @@ CACHE MANIFEST
 icon.png
 black.css
 PEG.js
-FORTH.js
-SYM.js
+
+NETWORK:
+*
