@@ -2,6 +2,9 @@
 <head>
 	<title>{{ title }} : {{ user.username }}</title>
 	<link rel="stylesheet" type="text/css" href="/black.css">
+	<meta name="theme-color" content="black">
+	<link rel="icon" type="image/png" href="icon.png">
+	<script src='/FORTH.js'></script>
 </head>
 <body>
 
@@ -9,10 +12,14 @@
 Hello, {{ user.username }}
 </pre>
 
+<pre id=stack>stack:data</pre>
+
+<pre id=error></pre>
+
 <div id=cmd>
+<textarea id=peg rows=9>{{ peg_min }}</textarea>
 
-
-<textarea id=pad rows=5>
+<textarea id=pad rows=9>
 # line comment
 
 -01 +02.30 -4e+56  \ numbers

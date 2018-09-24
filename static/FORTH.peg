@@ -1,0 +1,38 @@
+// PEG grammar
+
+{ log.innerText = '' }
+
+FORTH "metacompiler" = (
+  _ / comment  /* drop */
+  / n:number   { doit(n) }
+  / w:wordname { doit(w) }
+) *
+
+comment =
+    [#\\][^\n]*   // line
+  / '(' [^)]* ')' // block
+
+_ "drop spaces" = [ \t\r\n]+
+
+wordname = w:[^ \t\r\n]+
+  { return new Sym(join(w)) }
+
+number =
+    pfx:'0x' hex:[0-9a-fA-F]+
+    { return new Hex(pfx+join(hex)) }
+  / pfx:'0b' bin:[01]+
+    { return new Bin(pfx+join(bin)) }
+  / int:(S N)
+    flo:('.' N)?
+    exp:([eE] S N)?
+    {
+      if (!flo && !exp)
+        return new Int(join(int))
+      else
+        return new Num(
+          join(int)+
+          join(flo)+join(exp))
+    }
+      
+S = [\+\-]? // sign
+N = [0-9]+  // number
