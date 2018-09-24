@@ -11,6 +11,7 @@ github: https://github.com/ponyatov/jsF
 * offline mode
 * inter-client synchronization
 
-### Flash-based backend engine
+### Flask-based backend engine
 
 https://habr.com/post/346306/
+https://habr.com/post/346340/
