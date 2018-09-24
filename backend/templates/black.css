@@ -1,0 +1,14 @@
+* {
+	background: black; color: lightgreen;
+	font-family: monospace, monospace; font-size: 2vh;
+	margin: 0; 
+}
+
+textarea { width:100%; caret-color:red; }
+button   { width:100%; background: darkslategray; height: 11vmin; }
+pre		 { white-space: pre-wrap; }
+
+#cmd { position: absolute; bottom:0; width:100%; }
+
+#stack,#pad	{ color: cyan; }
+#error		{ color:yellow; }

@@ -1,4 +1,32 @@
 <html>
-<title>js: {{ title }}</title>
-<h1>Hello, {{ user.username }}</h1>
+<head>
+	<title>{{ title }} : {{ user.username }}</title>
+	<link rel="stylesheet" type="text/css" href="/black.css">
+</head>
+<body>
+
+<pre id=log>
+Hello, {{ user.username }}
+</pre>
+
+<div id=cmd>
+
+
+<textarea id=pad rows=5>
+# line comment
+
+-01 +02.30 -4e+56  \ numbers
+0xDeadBeef 0b1101  ( machine ) ? .
+
+\ undefined_word
+
+: none ;
+: recurse none recurse none ; 
+</textarea>
+
+<button id=go>GO</button>
+
+</div>
+
+</body>
 </html>
