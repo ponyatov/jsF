@@ -42,3 +42,6 @@ def SYMjs():
 @app.route('/PEG.js')
 def PEGjs():
     return sendjs('static/PEG.js')
+@app.route('/manifest')
+def manifest():
+    return sendjs('static/manifest')

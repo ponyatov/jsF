@@ -4,6 +4,7 @@
 	<link rel="stylesheet" type="text/css" href="/black.css">
 	<meta name="theme-color" content="black">
 	<link rel="icon" type="image/png" href="icon.png">
+	<link rel="manifest" href="/manifest">	
 	<script src="/PEG.js"></script>
 	<script src="/SYM.js"></script>
 	<script src="/FORTH.js"></script>
@@ -19,9 +20,9 @@ Hello, {{ user.username }}
 <pre id=error></pre>
 
 <div id=cmd>
-<textarea id=meta rows=9>{{ peg }}</textarea>
+<textarea id=meta rows=3>{{ peg }}</textarea>
 
-<textarea id=pad rows=9>
+<textarea id=pad rows=5>
 # line comment
 
 -01 +02.30 -4e+56  \ numbers
