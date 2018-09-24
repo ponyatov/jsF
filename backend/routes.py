@@ -8,7 +8,7 @@ def index():
     peg_full = open('static/FORTH.peg').read()
     peg_min  = open('static/minimal.peg').read()
     user = {'username': 'Dmitry'}
-    R = render_template('index.html',title='jsF',user=user)
+    R = render_template('index.html',title='jsF',user=user,peg=peg_min)
     R = make_response(R)
     R.headers['Content-Type'] = 'text/html; charset=utf-8'
     return R
