@@ -28,7 +28,7 @@ function err(some) { error.innerText = some }
 function flat(vector) { return [].concat.apply([],vector) }
 function join(token)  { return flat(token).join('') }
 
-S = [] // data stack
+S = Stack('DATA')
 
 function update() { stack.innerText = S; }
 

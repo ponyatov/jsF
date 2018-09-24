@@ -27,16 +27,18 @@ def icon():
     R.headers['Content-Type'] = 'image/png'
     return R
 
+def sendjs(filename):
+    F = open(filename) ; R = F.read() ; F.close()
+    R = make_response(R)
+    R.headers['Content-Type'] = 'application/javascript; charset=utf-8'
+    return R
+
 @app.route('/FORTH.js')
 def FORTHjs():
-    F = open('static/FORTH.js') ; R = F.read() ; F.close()
-    R = make_response(R)
-    R.headers['Content-Type'] = 'application/javascript; charset=utf-8'
-    return R
+    return sendjs('static/FORTH.js')
+@app.route('/SYM.js')
+def SYMjs():
+    return sendjs('static/PEG.js')
 @app.route('/PEG.js')
 def PEGjs():
-    F = open('static/PEG.js') ; R = F.read() ; F.close()
-    R = make_response(R)
-    R.headers['Content-Type'] = 'application/javascript; charset=utf-8'
-    return R
-        
+    return sendjs('static/PEG.js')
