@@ -1,3 +1,18 @@
 // PEG grammar
 
 { log.innerText = 'hello PEG' }
+
+FORTH "metacompiler" = (
+  _ / comment  /* drop */
+  / w:wordname { out(w) }
+) *
+
+comment =
+    [#\\][^\n]*   // line
+  / '(' [^)]* ')' // block
+
+
+_ "drop spaces" = [ \t\r\n]+
+
+wordname = w:[^ \t\r\n]+
+  { return join(w) }
