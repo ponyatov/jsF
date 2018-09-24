@@ -2,7 +2,5 @@ CACHE MANIFEST
 
 PEG.js
 icon.png
-black.css
-
-NETWORK:
-*
+*.css
+*.js
