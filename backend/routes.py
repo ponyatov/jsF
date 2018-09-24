@@ -8,7 +8,7 @@ def index():
     peg_full = open('static/FORTH.peg').read()
     peg_min  = open('static/minimal.peg').read()
     user = {'username': 'Dmitry'}
-    R = render_template('index.html',title='jsF',user=user,peg=peg_min)
+    R = render_template('index.html',title='FORTH/js',user=user,peg=peg_min)
     R = make_response(R)
     R.headers['Content-Type'] = 'text/html; charset=utf-8'
     return R
@@ -42,6 +42,14 @@ def SYMjs():
 @app.route('/PEG.js')
 def PEGjs():
     return sendjs('static/PEG.js')
-@app.route('/manifest')
-def manifest():
-    return sendjs('static/manifest')
+
+@app.route('/app.manifest')
+def appManifest():
+    F = open('static/app.manifest') ; R = F.read() ; F.close()
+    return R
+@app.route('/offline.manifest')
+def offlineappManifest():
+    F = open('static/offline.manifest') ; R = F.read() ; F.close()
+    R = make_response(R)
+    R.headers['Content-Type'] = 'Content-Type: text/cache-manifest; charset=utf-8'
+    return R
