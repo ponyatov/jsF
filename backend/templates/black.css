@@ -6,7 +6,7 @@
 
 textarea { width:100%; caret-color:red; }
 button   { width:100%; background: darkslategray; height: 11vmin; }
-pre		 { white-space: pre-wrap; }
+pre		 { width:100%; white-space: pre-wrap; word-break: break-all; }
 
 #cmd { position: absolute; bottom:0; width:100%; }
 

@@ -28,8 +28,14 @@ def icon():
     return R
 
 @app.route('/FORTH.js')
-def js():
+def FORTHjs():
     F = open('static/FORTH.js') ; R = F.read() ; F.close()
+    R = make_response(R)
+    R.headers['Content-Type'] = 'application/javascript; charset=utf-8'
+    return R
+@app.route('/PEG.js')
+def PEGjs():
+    F = open('static/PEG.js') ; R = F.read() ; F.close()
     R = make_response(R)
     R.headers['Content-Type'] = 'application/javascript; charset=utf-8'
     return R

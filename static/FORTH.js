@@ -11,16 +11,15 @@ function process() {
 }
 
 function process() {
-	err('')
-	try { 
+	err('') ; S = []
+	try {
 	// create parser
-	var parser = peg.generate(peg.value)
+	var parser = peg.generate(meta.value)
 	// and run it vith #pad value
-	//parser.parse(pad.value)
-	}
-	catch (e) { err(JSON.stringify(e))	}
-	// update web interface 
-	finally   { }//update()				}
+	parser.parse(pad.value)
+	} catch (e) { err(JSON.stringify(e)) }
+	// update web interface
+	finally { update() }
 }
 
 function out(some) { log.innerText  += some }
@@ -29,8 +28,10 @@ function err(some) { error.innerText = some }
 function flat(vector) { return [].concat.apply([],vector) }
 function join(token)  { return flat(token).join('') }
 
-function update() {
-	// S.dump()
-	var currentdate = new Date();
-	stack.innerText = currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+S = [] // data stack
+
+function update() { stack.innerText = S; }
+
+function doit(wname) {
+	S.push(wname)
 }

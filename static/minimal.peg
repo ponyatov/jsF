@@ -1,10 +1,10 @@
 // PEG grammar
 
-{ log.innerText = 'hello PEG' }
+{ log.innerText = '' }
 
 FORTH "metacompiler" = (
   _ / comment  /* drop */
-  / w:wordname { out(w) }
+  / w:wordname { doit(w) }
 ) *
 
 comment =
