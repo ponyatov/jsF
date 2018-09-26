@@ -8,14 +8,14 @@ function MObject(V) {
 	// single value
 	this.value	= V
 	
-//	// attr{}ibutes
-//	this.attr	= {}
-//	// assign attribute
-//	this.set	= function(key,obj) { this.attr[key] = obj; }
-//	// get attribute
-//	this.get	= function(key) { return this.attr[key] }
-//	// get list of attributes
-//	this.keys	= function() { return Object.keys(this.attr) }
+	// attr{}ibutes
+	this.attr	= {}
+	// assign attribute
+	this.set	= function(key,obj) { this.attr[key] = obj; return this }
+	// get attribute
+	this.get	= function(key) { return this.attr[key] }
+	// get list of attributes
+	this.keys	= function() { return Object.keys(this.attr) }
 	
 	// nest[]ed objects
 	this.nest	= []
@@ -25,20 +25,20 @@ function MObject(V) {
 //	this.pop	= function() { return this.nest.pop() }
 //	// clean stack
 //	this.dropall = function() { this.nest = [] }
-//	
-//	// execute object in context = stack
-//	this.exec	 = function(context) { context.push(this) }
-//	// compile object to context = vector
-//	this.compile = function(context) { context.push(this) }	
+	
+	// execute object in context = stack
+	this.exec	 = function(context) { context.push(this) }
+	// compile object to definition = vector
+	this.compile = function(definition) { context.push(this) }	
 	
 	// short object dump in <T:V> form
 	this.head	= function() { return "<"+this.type+":"+this.str()+">" }
 	// string representation of value only
 	this.str	= function() { return this.value.toString() }
 	// dump object in full tree form
-	this.dump	= function(depth=0) {
-		var T = this.pad(depth) + this.head()
-//		for (i in this.attr) T += this.attr[i].dump(depth+1,prefix=i)
+	this.dump	= function(depth=0,suffix='') {
+		var T = this.pad(depth) + this.head() + suffix
+		for (i in this.attr) T += this.attr[i].dump(depth+1,prefix=i)
 		for (j in this.nest) T += this.nest[j].dump(depth+1)
 		return T
 	}
@@ -74,6 +74,18 @@ function MContainer(V)	{ MObject.call(this,V) }
 
 function MStack(V)		{ MContainer.call(this,V) }
 
-function MMap(V)		{ MContainer.call(this,V) }
+function MMap(V)		{ MContainer.call(this,V)
+							this.push = function(obj) { this.set(obj.value,obj) }
+						}
 
 function MVector(V)		{ MContainer.call(this,V) }
+
+//active objects has executable semantics
+function MActive(V)		{ MObject.call(this,V) }
+
+// JS function wrapper as virtual machine command
+function MCmd(V,F)		{ MActive.call(this,V) ; this.exec = F
+							this.superdump = this.dump
+							this.dump = function(depth) {
+								return this.superdump(depth,suffix=' '+this.exec.toString()) }
+						}

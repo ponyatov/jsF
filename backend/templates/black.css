@@ -10,5 +10,6 @@ pre		 { width:100%; white-space: pre-wrap; word-break: break-all; }
 
 #cmd { position: absolute; bottom:0; width:100%; }
 
-#stack,#pad	{ color: cyan; }
+#stack,#pad	{ color:cyan; }
+#words		{ color:lightblue; }
 #error		{ color:yellow; }

@@ -4,6 +4,8 @@ S = new MStack('DATA')
 window.onload = function() {
 	go.onclick = process
 	document.body.onkeydown = keydown
+	init_vocabulary()
+	update()
 }
 
 function keydown(event) {
@@ -28,6 +30,21 @@ function err(some) { error.innerText = some }
 function flat(vector) { return [].concat.apply([],vector) }
 function join(token)  { return flat(token).join('') }
 
-function update() { stack.innerText = S.dump(); }
+function update() {
+	stack.innerText = S.dump()
+	words.innerText = W.dump()
+}
 
-function doit(obj) { S.push(obj) }
+COMPILE = false
+
+function doit(obj) {
+	if (COMPILE) obj.compile(COMPILE)
+	else		 obj.exec(S)
+}
+
+W = new MMap('FORTH')
+
+function init_vocabulary() {
+	W.push(new MCmd('.',function(context) { context.dropall()   } ))
+	W.push(new MCmd('?',function(context) { out(context.dump()) } ))
+}
