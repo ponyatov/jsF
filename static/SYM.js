@@ -54,20 +54,20 @@ function MSym(V)		{ MPrimitive.call(this,V) }
 function MStr(V)		{ MPrimitive.call(this,V) }
 
 function MNum(V)		{ MPrimitive.call(this,V)
-					  		this.value = parseFloat(V) }
+					  	this.value = parseFloat(V) }
 function MInt(V)		{ MPrimitive.call(this,V)
-							this.value = parseInt(V) }
+						this.value = parseInt(V) }
 
 function MHex(V)		{ MPrimitive.call(this,V)
-					  		this.value	= parseInt(V.substring(2),0x10)
-					  		this.str	= function() {
-								return '0x'+this.value.toString(0x10).toUpperCase() }
+					  	this.value	= parseInt(V.substring(2),0x10)
+					  	this.str	= function() {
+							return '0x'+this.value.toString(0x10).toUpperCase() }
 						}
 
 function MBin(V)		{ MPrimitive.call(this,V)
-					  		this.value	= parseInt(V.substring(2),0x02)
-							this.str	= function() {
-								return '0b'+this.value.toString(0x02) }
+					  	this.value	= parseInt(V.substring(2),0x02)
+						this.str	= function() {
+							return '0b'+this.value.toString(0x02) }
 						}
 
 function MContainer(V)	{ MObject.call(this,V) }
