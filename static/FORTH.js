@@ -1,7 +1,9 @@
-function FORTH_init() {
+
+S = new MStack('DATA')
+
+window.onload = function() {
 	go.onclick = process
 	document.body.onkeydown = keydown
-	S = MStack('DATA')
 }
 
 function keydown(event) {
@@ -9,18 +11,17 @@ function keydown(event) {
 }
 
 function process() {
-}
-
-function process() {
 	err('')
-	try {
+//	try {
 	// create parser
 	var parser = peg.generate(meta.value)
 	// and run it vith #pad value
 	parser.parse(pad.value)
-	} catch (e) { err(JSON.stringify(e)) }
+//	} catch (e) { err(JSON.stringify(e)) }
 	// update web interface
-	finally { update() }
+//	finally { 
+		update()
+//	}
 }
 
 function out(some) { log.innerText  += some }
@@ -31,6 +32,4 @@ function join(token)  { return flat(token).join('') }
 
 function update() { stack.innerText = S.dump(); }
 
-function doit(wname) {
-	S.push(MObject(wname))
-}
+function doit(obj) { S.push(obj) }

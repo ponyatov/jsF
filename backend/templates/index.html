@@ -1,4 +1,5 @@
-<html lang="en" manifest="/offline.manifest">
+<!--html lang="en" manifest="/offline.manifest"-->
+<html>
 <head>
 	<title>{{ title }} : {{ user.username }}</title>
 	<link rel="stylesheet" type="text/css" href="/black.css">
@@ -6,9 +7,10 @@
 	<link rel="icon" type="image/png" href="icon.png">
 	<link rel="manifest" href="/app.manifest">	
 	<script src="/PEG.js"></script>
-	<script id=SYMjs src="/SYM.js"></script>
-	<script src="/FORTH.js"></script>
-	<script>document.querySelector('#SYMjs').addEventListener('load', FORTH_init )</script>
+	<script>
+{{ symjs|safe }}
+{{ forthjs|safe }}
+	</script>
 </head>
 <body>
 
@@ -21,9 +23,9 @@ Hello, {{ user.username }}
 <pre id=error></pre>
 
 <div id=cmd>
-<textarea id=meta rows=3>{{ peg }}</textarea>
+<textarea id=meta rows=5>{{ peg }}</textarea>
 
-<textarea id=pad rows=5>
+<textarea id=pad rows=9>
 # line comment
 
 -01 +02.30 -4e+56  \ numbers

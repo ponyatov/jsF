@@ -15,25 +15,23 @@ comment =
 _ "drop spaces" = [ \t\r\n]+
 
 wordname = w:[^ \t\r\n]+
-  { return new MSym(join(w)) }
-
-S = [\+\-]? // sign
-N = [0-9]+  // number
+  { return new Sym(join(w)) }
 
 number =
     pfx:'0x' hex:[0-9a-fA-F]+
-    { return new MHex(pfx+join(hex)) }
+    { return new Hex(pfx+join(hex)) }
   / pfx:'0b' bin:[01]+
-    { return new MBin(pfx+join(bin)) }
+    { return new Bin(pfx+join(bin)) }
   / int:(S N)
     flo:('.' N)?
     exp:([eE] S N)?
     {
     if (!flo && !exp)
-      return new MInt(join(int))
+      return new Int(join(int))
     else
-      return new MNum(
+      return new Num(
         join(int)+join(flo)+join(exp))
     }
-
-  
+      
+S = [\+\-]? // sign
+N = [0-9]+  // number
