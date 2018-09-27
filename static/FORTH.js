@@ -19,7 +19,10 @@ function process() {
 	var parser = peg.generate(meta.value)
 	// and run it vith #pad value
 	parser.parse(pad.value)
-	} catch (e) { err(e.dump()) } // JSON.stringify(e)) }
+	} catch (e) {
+		try       { err(e.dump())          }
+		catch (x) { err(JSON.stringify(e)) }
+	}
 	// update web interface
 	finally {
 		update()

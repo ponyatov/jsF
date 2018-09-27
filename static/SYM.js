@@ -53,12 +53,12 @@ function MSym(V)		{ MPrimitive.call(this,V)
 	
 	this.exec = function() {
 	
-	// lookup in vocabulary
-	var body = W.get(this.value)
-	// execute found body
-	if (body) body.exec(S)
-	// or fallback: throw error
-	else      throw new MError('unknown',this)
+		// lookup in vocabulary
+		var body = W.get(this.value)
+		// execute found body
+		if (body) body.exec(S)
+		// or fallback: throw error
+		else      throw new MError('unknown',this)
 	
 	}
 
