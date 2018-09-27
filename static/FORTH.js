@@ -19,9 +19,11 @@ function process() {
 	var parser = peg.generate(meta.value)
 	// and run it vith #pad value
 	parser.parse(pad.value)
-	} catch (e) { err(JSON.stringify(e)) }
+	} catch (e) { err(e.dump()) } // JSON.stringify(e)) }
 	// update web interface
-	finally { update() }
+	finally {
+		update()
+	}
 }
 
 function out(some) { log.innerText  += some }

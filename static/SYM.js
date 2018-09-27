@@ -23,8 +23,8 @@ function MObject(V) {
 	this.push	= function(obj) { this.nest.push(obj) ; return this }
 //	// pop object from stack
 //	this.pop	= function() { return this.nest.pop() }
-//	// clean stack
-//	this.dropall = function() { this.nest = [] }
+	// clean stack
+	this.dropall = function() { this.nest = [] }
 	
 	// execute object in context = stack
 	this.exec	 = function(context) { context.push(this) }
@@ -49,7 +49,20 @@ function MObject(V) {
 
 function MPrimitive(V)	{ MObject.call(this,V) }
 
-function MSym(V)		{ MPrimitive.call(this,V) }
+function MSym(V)		{ MPrimitive.call(this,V)
+	
+	this.exec = function() {
+	
+	// lookup in vocabulary
+	var body = W.get(this.value)
+	// execute found body
+	if (body) body.exec(S)
+	// or fallback: throw error
+	else      throw new MError('unknown',this)
+	
+	}
+
+}
 
 function MStr(V)		{ MPrimitive.call(this,V) }
 
@@ -89,3 +102,6 @@ function MCmd(V,F)		{ MActive.call(this,V) ; this.exec = F
 							this.dump = function(depth) {
 								return this.superdump(depth,suffix=' '+this.exec.toString()) }
 						}
+
+// Error object
+function MError(V,obj)	{ MPrimitive.call(this,V) ; this.push(obj) }
