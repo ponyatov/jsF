@@ -42,6 +42,13 @@ function update() {
 
 COMPILE = false
 
+function cdef(wname) {
+	COMPILE = new MDef(wname.value) 
+	W.push(COMPILE)
+}
+
+function endef() { COMPILE = false }
+
 function doit(obj) {
 	if (COMPILE) obj.compile(COMPILE)
 	else		 obj.exec(S)

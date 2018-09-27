@@ -28,16 +28,16 @@ function MObject(V) {
 	
 	// execute object in context = stack
 	this.exec	 = function(context) { context.push(this) }
-	// compile object to definition = vector
-	this.compile = function(definition) { context.push(this) }	
+	// compile object to context = vector
+	this.compile = function(context) { context.push(this) }	
 	
 	// short object dump in <T:V> form
 	this.head	= function() { return "<"+this.type+":"+this.str()+">" }
 	// string representation of value only
 	this.str	= function() { return this.value.toString() }
 	// dump object in full tree form
-	this.dump	= function(depth=0,suffix='') {
-		var T = this.pad(depth) + this.head() + suffix
+	this.dump	= function(depth=0,prefix='',suffix='') {
+		var T = this.pad(depth) + this.head(prefix) + suffix
 		for (i in this.attr) T += this.attr[i].dump(depth+1,prefix=i)
 		for (j in this.nest) T += this.nest[j].dump(depth+1)
 		return T
@@ -50,9 +50,7 @@ function MObject(V) {
 function MPrimitive(V)	{ MObject.call(this,V) }
 
 function MSym(V)		{ MPrimitive.call(this,V)
-	
 	this.exec = function() {
-	
 		// lookup in vocabulary
 		var body = W.get(this.value)
 		// execute found body
@@ -61,7 +59,6 @@ function MSym(V)		{ MPrimitive.call(this,V)
 		else      throw new MError('unknown',this)
 	
 	}
-
 }
 
 function MStr(V)		{ MPrimitive.call(this,V) }
@@ -99,9 +96,11 @@ function MActive(V)		{ MObject.call(this,V) }
 // JS function wrapper as virtual machine command
 function MCmd(V,F)		{ MActive.call(this,V) ; this.exec = F
 							this.superdump = this.dump
-							this.dump = function(depth) {
-								return this.superdump(depth,suffix=' '+this.exec.toString()) }
+							this.dump = function(depth,prefix='',suffix='') {
+								return this.superdump(depth,prefix,suffix=' '+this.exec.toString()) }
 						}
+
+function MDef(V)		{ MActive.call(this,V) }
 
 // Error object
 function MError(V,obj)	{ MPrimitive.call(this,V) ; this.push(obj) }

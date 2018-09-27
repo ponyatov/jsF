@@ -4,6 +4,8 @@
 
 FORTH "metacompiler" = (
   _ / comment  /* drop */
+  / c:colondef { cdef(c) }
+  / ';'  	   { endef() }
   / n:number   { doit(n) }
   / w:wordname { doit(w) }
 ) *
@@ -13,6 +15,9 @@ comment =
   / '(' [^)]* ')' // block
 
 _ "drop spaces" = [ \t\r\n]+
+
+colondef =
+	':' _ w:wordname { return w }
 
 wordname = w:[^ \t\r\n]+
   { return new MSym(join(w)) }
