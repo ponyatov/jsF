@@ -29,7 +29,7 @@ function MObject(V) {
 	// execute object in context = stack
 	this.exec	 = function(context) { context.push(this) }
 	// compile object to context = vector
-	this.compile = function(context) { context.push(this) }	
+	this.compile = function(context) { context.push(this) }
 	
 	// short object dump in <T:V> form
 	this.head	= function() { return "<"+this.type+":"+this.str()+">" }
@@ -57,7 +57,9 @@ function MSym(V)		{ MPrimitive.call(this,V)
 		if (body) body.exec(S)
 		// or fallback: throw error
 		else      throw new MError('unknown',this)
-	
+	}
+	this.compile = function(context) {
+		context.push( W.get[this.value] /* global lookup */ )
 	}
 }
 
