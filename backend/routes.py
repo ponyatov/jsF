@@ -42,8 +42,8 @@ offmanifest = open('static/offline.manifest').read()
 @app.route('/app.manifest')
 def appManifest():
     return appmanifest
-# @app.route('/offline.manifest')
-# def offlineappManifest():
-#     R = make_response(offmanifest)
-#     R.headers['Content-Type'] = 'Content-Type: text/cache-manifest; charset=utf-8'
-#     return R
+@app.route('/offline.manifest')
+def offlineappManifest():
+    R = make_response(offmanifest)
+    R.headers['Content-Type'] = 'Content-Type: text/cache-manifest; charset=utf-8'
+    return R
